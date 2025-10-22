@@ -277,23 +277,42 @@ OTP_EXPIRY_MINUTES = config('OTP_EXPIRY_MINUTES', default=10, cast=int)
 FRONTEND_URL = config('FRONTEND_URL', default='http://localhost:5173')
 
 # Logging Configuration
+# Create logs directory if it doesn't exist (for local development)
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(LOGS_DIR):
+    try:
+        os.makedirs(LOGS_DIR)
+    except (OSError, PermissionError):
+        # If we can't create the directory (e.g., in production), we'll just use console logging
+        pass
+
+# Configure logging handlers based on environment
+LOGGING_HANDLERS = {
+    'console': {
+        'level': 'DEBUG',
+        'class': 'logging.StreamHandler',
+    },
+}
+
+# Only add file handler if we can write to the logs directory
+if os.path.exists(LOGS_DIR) and os.access(LOGS_DIR, os.W_OK):
+    LOGGING_HANDLERS['file'] = {
+        'level': 'INFO',
+        'class': 'logging.FileHandler',
+        'filename': os.path.join(LOGS_DIR, 'django.log'),
+    }
+    DJANGO_HANDLERS = ['file', 'console']
+else:
+    # In production (Railway, etc.), only use console logging
+    DJANGO_HANDLERS = ['console']
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-    },
+    'handlers': LOGGING_HANDLERS,
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': DJANGO_HANDLERS,
             'level': 'INFO',
             'propagate': True,
         },
