@@ -1,0 +1,52 @@
+[
+  {
+    "id": 52,
+    "name": "Ashkāsham",
+    "state_id": 3901
+  },
+  {
+    "id": 68,
+    "name": "Fayzabad",
+    "state_id": 3901
+  },
+  {
+    "id": 78,
+    "name": "Jurm",
+    "state_id": 3901
+  },
+  {
+    "id": 84,
+    "name": "Khandūd",
+    "state_id": 3901
+  },
+  {
+    "id": 115,
+    "name": "Rāghistān",
+    "state_id": 3901
+  },
+  {
+    "id": 131,
+    "name": "Wākhān",
+    "state_id": 3901
+  },
+  {
+    "id": 72,
+    "name": "Ghormach",
+    "state_id": 3871
+  },
+  {
+    "id": 108,
+    "name": "Qala i Naw",
+    "state_id": 3871
+  },
+  {
+    "id": 54,
+    "name": "Baghlān",
+    "state_id": 3875
+  },
+  {
+    "id": 140,
+    "name": "Ḩukūmatī Dahanah-ye Ghōrī",
+    "state_id": 3875
+  }
+]
