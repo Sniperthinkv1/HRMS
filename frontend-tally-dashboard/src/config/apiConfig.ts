@@ -2,6 +2,11 @@
 export const API_CONFIG = {
   // Automatically detect environment
   getBaseUrl: () => {
+    // Production: Vercel deployment
+    if (window.location.hostname === "hrms-frontend-phi.vercel.app") {
+      return "https://hrms-production-ed39.up.railway.app";
+    }
+
     // If we're on the production server, use the same domain
     if (window.location.hostname === "15.207.246.171") {
       return `http://${window.location.hostname}`;
@@ -16,7 +21,7 @@ export const API_CONFIG = {
     }
 
     // For any other domain, use the current domain
-    return `http://${window.location.hostname}`;
+    return `https://${window.location.hostname}`;
   },
 
   // Get the full API URL
